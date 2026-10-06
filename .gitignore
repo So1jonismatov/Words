@@ -11,3 +11,5 @@ test-results/
 playwright-report/
 .vercel
 data/*.log
+.env*
+!.env.example
