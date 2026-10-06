@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Material 3–style tonal palette. Surfaces are separated by tone, not borders:
+ *   bg      = surface
+ *   card    = surface-container-low   (cards, panes)
+ *   card-3  = surface-container-high  (list items, chips inside cards)
+ *   card-2  = surface-container-highest (filled text fields, tracks)
+ *   accent  = primary (warm gold), accent-soft = secondary container
+ *   teal    = tertiary
+ *   line    = outline-variant (only for rare dividers)
+ */
+:root {
+  --bg: #f8f6f1;
+  --card: #f1eee6;
+  --card-3: #eae6dc;
+  --card-2: #e3ded3;
+  --line: #d5cfc2;
+  --fg: #1d1b17;
+  --muted: #4e555b;
+  --accent: #7b5a12;
+  --accent-fg: #ffffff;
+  --accent-soft: color-mix(in oklab, #7b5a12 16%, #f1eee6);
+  --teal: #286f64;
+  --teal-soft: color-mix(in oklab, #286f64 15%, #f1eee6);
+  --danger: #b3261e;
+  --ring: #7b5a12;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #111315;
+  --card: #1a1d20;
+  --card-3: #22262a;
+  --card-2: #2a2f33;
+  --line: #3a4046;
+  --fg: #e7e4dd;
+  --muted: #a7afb6;
+  --accent: #dcb873;
+  --accent-fg: #2b2006;
+  --accent-soft: color-mix(in oklab, #dcb873 20%, #1a1d20);
+  --teal: #7ec0b5;
+  --teal-soft: color-mix(in oklab, #7ec0b5 18%, #1a1d20);
+  --danger: #f2b8b5;
+  --ring: #dcb873;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-card-3: var(--card-3);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-danger: var(--danger);
+  --font-sans: "Manrope Variable", "Manrope", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --animate-enter: enter 280ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--accent-soft);
+  }
+}
+
+@layer components {
+  /*
+   * Touch target: keeps a control visually compact but makes its hit area at least
+   * 44×44px (Apple HIG / WCAG 2.5.5) with an invisible, centred pseudo-element.
+   */
+  .tap {
+    position: relative;
+  }
+  .tap::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+
+  /* Thin, unobtrusive scrollbars for inner scroll areas. */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--card-2) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

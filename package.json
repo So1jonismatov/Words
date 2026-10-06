@@ -1,0 +1,51 @@
+{
+  "name": "manaviyat-xaritasi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ma'naviyat Xaritasi — a word-association research survey about the concept of spirituality.",
+  "scripts": {
+    "predev": "tsx scripts/setup-db.ts",
+    "dev": "next dev",
+    "prebuild": "tsx scripts/setup-db.ts",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "db:setup": "tsx scripts/setup-db.ts",
+    "db:migrate": "tsx scripts/setup-db.ts --migrate-only",
+    "db:seed": "tsx scripts/setup-db.ts --seed",
+    "db:generate": "drizzle-kit generate --config drizzle.sqlite.config.ts && drizzle-kit generate --config drizzle.pg.config.ts",
+    "db:demo": "tsx scripts/demo-data.ts",
+    "db:reset": "tsx scripts/reset-participants.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@libsql/client": "^0.18.0",
+    "clsx": "^2.1.1",
+    "d3": "^7.9.0",
+    "drizzle-orm": "^0.45.3",
+    "next": "^16.3.8",
+    "next-intl": "^4.14.9",
+    "postgres": "^3.4.9",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/d3": "^7.4.3",
+    "@types/node": "^24",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "drizzle-kit": "^0.31.11",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.3"
+  }
+}
